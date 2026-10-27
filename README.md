@@ -8,7 +8,7 @@ GitHub Pages adresini Safari’de açın. Paylaş → Ana Ekrana Ekle ile ayrı 
 - Metinle görev oluşturma, düzenleme, silme; tarih ve saat seçimi.
 - Gecikmiş görevler, aciliyet ve son tarihe göre otomatik sıralama.
 - Tamamlama/geçmiş/geri alma. Günlük veya haftalık görev tamamlandığında sonraki oluşumu ekleme; geçmişte kalan tekrarları ileri atlama.
-- Gerçek Türkçe Web Speech API girişi. Tarayıcı/Siri desteği ve izinler gerekir. Destek yoksa klavyenin dikte mikrofonunu kullanın. Tarih ve tekrar alanları elle kontrol edilir; doğal dil tarih çözümleme yoktur.
+- Gerçek Türkçe Web Speech API girişi. Tarayıcı/Siri desteği ve izinler gerekir. Destek yoksa klavyenin dikte mikrofonunu kullanın. Türkçe tarih/saat çözümleme: ay adları, rakamla veya yazıyla gün, bugün/yarın, hafta günleri, saat ve günlük/haftalık tekrar. Algılanan alanları kaydetmeden kontrol edin. Tarih söylenip saat söylenmezse 09.00 önerilir. Dinleme sürekli çalışır; tarayıcı oturumu keserse metni koruyarak yeniden bağlanır. Dört art arda boş kesintiden sonra açık hata gösterilir. Not alanı tam dökümü saklar.
 - Gün seçimi, son 7 gün grafiği, 25 dakikalık odak sayacı, geniş panel.
 - 15 dakika erteleme, uygulama açıkken hatırlatma, ICS Takvim aktarımı.
 - JSON yedek indirme ve doğrulamalı geri yükleme.
