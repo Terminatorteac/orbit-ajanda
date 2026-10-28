@@ -27,3 +27,6 @@ Bu klasördeki dosyaları deponun köküne yükleyin. Settings → Pages → Dep
 
 ## Geliştirme ve doğrulama
 Harici paket veya derleme gerektirmez. HTTPS ya da localhost üzerinden servis edin. Safari/iPhone üzerinde mikrofon, ana ekrana ekleme, dosya paylaşımı ve çevrimdışı kullanım gerçek cihazda doğrulanmalıdır. Her eski iOS sürümü için garanti verilmez; özellik algılama ve metin girişi geri dönüşü vardır.
+
+## 1.2 ses durdurma düzeltmesi
+Durdur düğmesi tanıma oturumunu anında iptal eder; yeniden bağlanma zamanlayıcısını ve eski olayları kapatır. Ekranda alınmış metin korunur; durdurma sonrasında gelmesi muhtemel yeni sonuçlar beklenmez. Göreve ekle, gerekirse mikrofonu kapatıp görünen metni aynı işlemde kaydeder.

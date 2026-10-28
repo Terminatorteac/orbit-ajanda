@@ -29,7 +29,16 @@ class Session{
  r.onend=()=>{if(!current())return;const segment=this.segment.trim();this.base=join(this.base,segment);this.segment='';this.rec=null;this.emptyEnds=segment?0:this.emptyEnds+1;if(this.wanted&&this.emptyEnds<4){this.onState('reconnecting');this.pending=this.schedule(()=>{this.pending=null;this.open(gen);},350);return;}if(this.wanted){this.wanted=false;this.lastError='repeated-end';this.onState('error',this.lastError);}this.finish();};
  try{r.start();}catch(e){this.rec=null;this.wanted=false;this.lastError='start-failed';this.onState('error',this.lastError);this.finish();}}
  finish(){this.finishing=false;this.cancel(this.stopTimeout);this.stopTimeout=null;if(!this.lastError)this.onState('stopped');this.resolve?.(join(this.base,this.segment));this.resolve=null;}
- stop(){if(this.finishing)return this.stopPromise;this.wanted=false;this.cancel(this.pending);this.pending=null;this.finishing=true;this.onState('finishing');this.stopPromise=new Promise(resolve=>{this.resolve=resolve;});const result=this.stopPromise;if(this.rec){this.stopTimeout=this.schedule(()=>{if(this.rec){const r=this.rec;this.base=join(this.base,this.segment);this.segment='';this.rec=null;try{r.abort();}catch{}}this.finish();},1600);try{this.rec.stop();}catch{this.finish();}}else this.finish();return result;}
+ stop(){
+  // Freeze the already displayed transcript before aborting. Safari may never emit end.
+  this.wanted=false;this.finishing=false;this.generation++;
+  this.cancel(this.pending);this.pending=null;this.cancel(this.stopTimeout);this.stopTimeout=null;
+  this.base=join(this.base,this.segment);this.segment='';const text=this.base;
+  const r=this.rec;this.rec=null;
+  if(r){r.onstart=r.onresult=r.onerror=r.onend=null;try{r.abort();}catch{try{r.stop();}catch{}}}
+  this.lastError=null;this.onText(text);this.onState('stopped');
+  this.resolve?.(text);this.resolve=null;return text;
+ }
  dispose(){this.wanted=false;this.generation++;this.cancel(this.pending);this.cancel(this.stopTimeout);if(this.rec){try{this.rec.abort();}catch{}}this.rec=null;this.finishing=false;this.resolve?.(join(this.base,this.segment));this.resolve=null;}
 }
 const api={parse,join,Session};if(typeof module!=='undefined')module.exports=api;else global.OrbitVoice=api;
